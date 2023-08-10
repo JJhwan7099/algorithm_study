@@ -6,15 +6,9 @@ int N, S, M;
 int volume[1000];
 vector<int> DP[1000];
 int maximum = -1;
-int max(int a, int b) 
-{
-    if(a>b) return a; else return b;
-}
 void dp()
 {
     DP[0].push_back(S);
-    // DP[1].push_back(DP[0][0] + volume[1]);
-    // DP[1].push_back(DP[0][0] - volume[1]);
     for(int i = 1; i <= N; i++)
     {
         map<int,int>m;
@@ -48,8 +42,6 @@ void dp()
                 }
             }
         }
-        // for(int j = 0; j < DP[i].size(); j++) cout << DP[i][j] << " ";
-        // cout << "<-" << i << "size: "<< DP[i].size() << endl;
     }
 }
 int main()
