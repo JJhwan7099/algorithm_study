@@ -28,9 +28,11 @@ void search(int start)
                 if(tot[v1[a][i]] == -1) tot[v1[a][i]] = 0;
                 if(tot[a] == -1) tot[a] = 0;;
                 tot[v1[a][i]] = tot[a] + cost[a][v1[a][i]];
-                q1.push(v1[a][i]);
+                q1.push(v1[a][i]); 
+                /*이게 젤 중요했음 각 노드로 갈 수 있는 최단 거리가 계속
+                업데이트 되기 때문에, 업데이트 될 때 마다 그 노드를 기준으로
+                주변노드의 값들을 다시 업데이트 해줘야함!!!!!*/
             }
-            // cout << a << " => " << v1[a][i] << " cost: " << tot[v1[a][i]] << '\n';
         }
         q1.pop();
     }
