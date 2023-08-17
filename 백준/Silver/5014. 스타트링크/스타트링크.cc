@@ -1,50 +1,40 @@
 #include <iostream>
+#include <algorithm>
 #include <queue>
 using namespace std;
-#define FOR(i,N) for(int i=1;i<=N;i++)
-int F,S,G,U,D;
-int arr[1000001]; // 최단 거리 저장
-int visit[1000001];
-void search(int S)
-{
-    queue<int> q1;
-    q1.push(S);
-    while(!q1.empty())
-    {
-        int a = q1.front(); 
-        visit[a] = 1;
-        for(int i=0; i<q1.size(); i++)
-        {
-            if( a+U<=F && visit[a+U]!= 1)
-            {
-                    arr[a+U] = arr[a] + 1;
-                visit[a+U] = 1;
-                q1.push(a+U);
-            }
-            if( a-D>=1 && visit[a-D]!= 1)
-            {
-                    arr[a-D] = arr[a] + 1;
-                visit[a-D] = 1;
-                q1.push(a-D);
+int cnt[1000001]={0, };
+int main() {
+    int F, S, G, U, D;
+    cin>>F>>S>>G>>U>>D;
+    queue<int>q;
+    q.push(S);
+    while(!q.empty()) {
+        int k=q.front();
+        q.pop();
+        if(k+U<=F && k+U != S) {
+            if(cnt[k+U]==0) {
+                cnt[k+U]=cnt[k]+1;
+                q.push(k+U);
             }
         }
-        q1.pop();
+        if(k-D>=1 && k-D != S) {
+            if(cnt[k-D]==0) {
+                cnt[k-D]=cnt[k]+1;
+                q.push(k-D);
+            }
+        }
+        if(k+U==G || k-D==G) {
+            break;
+        }
     }
-}
-int main()
-{
-    cin >> F >> S >> G >> U >> D;
-    arr[S] = 0;
-    search(S);
-    if(G == S)
-    {
+    if(S == G){
         cout << "0";
         return 0;
     }
-    if(arr[G]==0)
-    {
-        cout << "use the stairs";
-        return 0;
+    if(cnt[G]!=0) {
+        cout<<cnt[G];
     }
-    cout << arr[G];
+    else {
+        cout<<"use the stairs";
+    }
 }
