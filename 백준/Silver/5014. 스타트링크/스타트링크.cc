@@ -15,39 +15,15 @@ void search(int S)
         visit[a] = 1;
         for(int i=0; i<q1.size(); i++)
         {
-            // if((arr[a+U] > arr[a] + 1|| arr[a+U]==0))
-            // {
-                
-            //     if(visit[a+U]!=1 && a+U <= F)
-            //     {
-            //         arr[a+U] = arr[a] + 1;
-            //         q1.push(a+U);
-            //     }
-            // }
-            // if((arr[a-D] > arr[a] + 1|| arr[a-D]==0))
-            // {
-                
-            //     if(visit[a-D]!=1 && a-D >= 1)
-            //     {
-            //         arr[a-D] = arr[a] + 1;
-            //         q1.push(a+U);
-            //     }
-            // }
             if( a+U<=F && visit[a+U]!= 1)
             {
-                if(arr[a+U] < arr[a] + 1 || arr[a+U] == 0)
-                {
                     arr[a+U] = arr[a] + 1;
-                }
                 visit[a+U] = 1;
                 q1.push(a+U);
             }
             if( a-D>=1 && visit[a-D]!= 1)
             {
-                if(arr[a-D] < arr[a] + 1 || arr[a-D] == 0)
-                {
                     arr[a-D] = arr[a] + 1;
-                }
                 visit[a-D] = 1;
                 q1.push(a-D);
             }
