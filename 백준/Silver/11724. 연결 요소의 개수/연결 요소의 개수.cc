@@ -30,7 +30,7 @@ void bfs(int n)
 int main()
 {
     cin >> N >> M;
-    fill(&check[1],&check[N+1],1);
+    FOR(i,N) check[i] = 1;
     FOR(i,M)
     {
         int a, b; cin >> a >> b;
