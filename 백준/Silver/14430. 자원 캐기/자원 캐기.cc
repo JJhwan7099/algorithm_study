@@ -4,8 +4,6 @@ using namespace std;
 int ground[301][301];
 int DP[301][301];
 int N,M;
-int dx[2] = {0,-1};
-int dy[2] = {-1,0};
 void dp()
 {
     DP[1][1] = ground[1][1];
