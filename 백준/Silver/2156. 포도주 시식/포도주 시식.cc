@@ -23,7 +23,5 @@ int main()
         cin >> num[i];
     }
     dp();
-    int mmax = DP[1][1];
-    for(int i=1; i<=n; i++) for(int j=0; j<2; j++) if(DP[i][j]>mmax) mmax=DP[i][j];
-    cout << mmax;
+    cout << max(max(DP[n][0],DP[n][1]),DP[n][2]);
 }
