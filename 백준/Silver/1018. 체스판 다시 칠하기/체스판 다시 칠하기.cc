@@ -1,109 +1,77 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-
+#include<iostream>
 using namespace std;
-
-void Count(int a,int b,vector<string> board)
+char graph[51][51];
+#define FOR(i,N) for(int i=1; i<=N; i++)
+int check(int startx, int starty)
 {
-    int count = 0;
-    vector<int> minini;
-    for(int i = 0; i < b-7; i++)//B시작
+    //맨 처음이 W일때
+    int a = 0;
+    FOR(x,8)FOR(y,8)
     {
-        
-        for(int j = 0; j < a-7; j++)//j가 세로
+        int X = x+startx-1;
+        int Y = y+starty-1;
+        if(X%2==1)
         {
-            int linec = 1;
-            for(int x = j; x < j + 8; x++ )
+            if(y%2==1)
             {
-                //B시작
-                if(linec%2 == 1)//홀수번째줄일때
-                {
-                    for(int y = 0; y <4 ; y++)
-                    {
-                        if(board[x+1][i+(y*2)]=='W')
-                        {
-                            count++;
-                        }
-                        if(board[x+1][i+(y*2+1)]=='B')
-                        {
-                            count++;
-                        }
-                    }
-                    linec++;
-                }else{//짝수번째줄일때
-                    for(int y = 0; y < 4 ; y++)
-                    {
-                        if(board[x+1][i+(y*2)]=='B')
-                        {
-                            count++;
-                        }
-                        if(board[x+1][i+(y*2+1)]=='W')
-                        {
-                            count++;
-                        }
-                    }
-                    linec++;
-                }
+                if(graph[X][Y]!='W') a++;
             }
-            minini.push_back(count);
-            count = 0;
-            linec = 1;
-            for(int x = j; x < j + 8; x++ )
+            else
             {
-                if(linec%2 == 1)//홀수번째줄일때
-                {
-                    for(int y = 0; y < 4 ; y++)
-                    {
-                        if(board[x+1][i+(y*2)]=='B')
-                        {
-                            count++;
-                        }
-                        if(board[x+1][i+(y*2+1)]=='W')
-                        {
-                            count++;
-                        }
-                    }
-                    linec++;
-                }else{//짝수번째줄일때
-                    for(int y = 0; y < 4 ; y++)
-                    {
-                        if(board[x+1][i+(y*2)]=='W')
-                        {
-                            count++;
-                        }
-                        if(board[x+1][i+(y*2+1)]=='B')
-                        {
-                            count++;
-                        }
-                    }
-                    linec++;
-                }
+                if(graph[X][Y]!='B') a++;
             }
-            minini.push_back(count);
-            count = 0;                
-            
+        }
+        else
+        {
+            if(y%2==1)
+            {
+                if(graph[X][Y]!='B') a++;
+            }
+            else
+            {
+                if(graph[X][Y]!='W') a++;
+            }
         }
     }
-    int min = min_element(minini.begin(), minini.end()) - minini.begin();
-    cout<< minini[min] << '\n';
-
+    //B 시작
+    int aa = 0;
+    FOR(x,8)FOR(y,8)
+    {
+        int X = x+startx-1;
+        int Y = y+starty-1;
+        if(X%2==1)
+        {
+            if(y%2==1)
+            {
+                if(graph[X][Y]!='B') aa++;
+            }
+            else
+            {
+                if(graph[X][Y]!='W') aa++;
+            }
+        }
+        else
+        {
+            if(y%2==1)
+            {
+                if(graph[X][Y]!='W') aa++;
+            }
+            else
+            {
+                if(graph[X][Y]!='B') aa++;
+            }
+        }
+    }
+    return min(a,aa);
 }
 int main()
 {
-    int a, b;
-    cin >> a;
-    cin >> b;
-
-    vector<string> board;
-    for(int i = 0; i < a + 1; i++)
+    int N,M; cin >> N >> M;
+    FOR(i,N)FOR(j,M) cin >> graph[i][j];
+    int a = 2501;
+    FOR(i,N-7)FOR(j,M-7)
     {
-        string line; getline(cin, line); 
-        board.push_back(line);
+        a = min(a,check(i,j));
     }
-    Count(a,b,board);
-    
-    return 0;
-    
+    cout << a;
 }
