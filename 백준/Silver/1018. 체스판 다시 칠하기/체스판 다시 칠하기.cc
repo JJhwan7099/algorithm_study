@@ -68,7 +68,7 @@ int main()
 {
     int N,M; cin >> N >> M;
     FOR(i,N)FOR(j,M) cin >> graph[i][j];
-    int a = 2501;
+    int a = 64;
     FOR(i,N-7)FOR(j,M-7)
     {
         a = min(a,check(i,j));
