@@ -40,10 +40,7 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
         else
         {
             htime++;
-            if(hp<health)
-            {
-                hp+=hpup;
-            }
+            if(hp<health)   hp+=hpup;
             if(htime==ht)
             {
                 hp+=bonushp;
@@ -51,7 +48,6 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
             }
             if(hp>health) hp = health;
         }
-        cout << s << " : " << hp << " " << htime << " " << ht << endl;
     }
     return answer;
 }
