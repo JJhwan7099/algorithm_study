@@ -1,48 +1,22 @@
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <iostream>
-#include <unordered_map>
+#include <map>
 using namespace std;
-bool cmp(const vector<int>& a, const vector<int>& b)
-{
-    return a.size() < b.size();
-}
 vector<int> solution(string s) {
     vector<int> answer;
-    vector<vector<int>>v;
-    vector<int> vv;
-    string ss = "";
+    map<int,int> m;
+    map<int,int,greater<>> result;
+    string ss="";
     for(int i=1; i<s.length()-1; i++)
     {
-        if(s[i]=='{') ss="";
-        else if(s[i]=='}') 
+        if(isdigit(s[i])) ss+=s[i];
+        else if((s[i]==','&&ss!="")||s[i]=='}')
         {
-            vv.push_back(stoi(ss));
-            v.push_back(vv);
-            vv.clear();
-        }
-        else if(s[i-1]!='}'&&s[i]==',')
-        {
-            vv.push_back(stoi(ss));
+            m[stoi(ss)]++;
             ss="";
         }
-        else if(s[i]!=',' && s[i]!='{' && s[i]!='}'){
-            ss+=s[i];
-        }
     }
-    sort(v.begin(), v.end(), cmp);
-    unordered_map<int,int> m;
-    for(auto&a:v)
-    {
-        for(auto&b:a)
-        {
-            if(m[b]!=1)
-            {
-                m[b]=1;
-                answer.push_back(b);
-            }
-        }
-    }
+    for(auto&a:m) result[a.second] = a.first;
+    for(auto&a:result) answer.push_back(a.second);
     return answer;
 }
