@@ -98,20 +98,22 @@ vector<int> solution(vector<vector<int>> dice) {
                 for(auto&c:dice[B[z]-1]) bsum.insert({b+c,z+1});
             }
         }
-        map<int,int> Am;
-        map<int,int> Bm;
-        for(auto&b:asum) if(b.second==n/2) Am[b.first]++;
-        for(auto&b:bsum) if(b.second==n/2) Bm[b.first]++;
-        int cnt=0;
-        for(auto&b:Am)
-        {
-            for(auto&c:Bm) if(b.first>c.first) cnt+=c.second*b.second;
-        }
-        if(max==-1||max<cnt) 
-        {
-            max = cnt;
-            answer = A;
-        }
+        multimap<int,int> Am;
+        multimap<int,int> Bm;
+        for(auto&b:asum) if(b.second==n/2) Am.insert({b.first,1});
+        for(auto&b:bsum) if(b.second==n/2) Bm.insert({b.first,1});
+        // int seungreul;
+        // int cnt=0;
+        // for(auto&b:Am)
+        // {
+        //     auto it = Bm.begin();
+        //     while(it->first<b.first)
+        //     {
+        //         cnt++;
+        //         it++;
+        //     }
+        // }
+        // cout << cnt << endl;
     }
     return answer;
 }
