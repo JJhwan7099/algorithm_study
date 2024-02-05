@@ -3,20 +3,19 @@ using namespace std;
 #define FOR(i,N) for(int i=1; i<=N; i++)
 int L;
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     cin >> L;
-    int r = 1;
-    int val = 0;
-    FOR(i,L)
+    unsigned long r = 1;
+    unsigned long val = 0;
+    string s;
+    cin >> s;
+    FOR(i,s.length())
     {
-        char a; cin >> a;
-        int h = a-'a'+1;
-        h*=r;
-        h%=1234567891;
-        val+=h;
-        r*=31;
+        int h = (s[i-1]-'a')+1;
+        int hh = (h*r)%1234567891;
+        val+=hh;
+        r = (r*31)%1234567891;
     }
+    val%=1234567891;
     cout << val;
     return 0;
 }
