@@ -7,6 +7,7 @@ vector<pair<pair<char,char>,pair<char,int>>> rule;
 map<char,int> m;
 int cnt;
 int answer;
+string v;
 bool check()
 {
     for(auto&a:rule)
@@ -29,7 +30,7 @@ bool check()
     }
     return true;
 }
-void make_name(const vector<char>& v, string s)
+void make_name(string s)
 {
     if(check())
     {
@@ -44,7 +45,7 @@ void make_name(const vector<char>& v, string s)
             {
                 m[v[i]]=cnt;
                 cnt++;
-                make_name(v,s+v[i]);
+                make_name(s+v[i]);
                 cnt--;
                 m[v[i]]=0;
             }
@@ -54,15 +55,11 @@ void make_name(const vector<char>& v, string s)
 int solution(int n, vector<string> data) {
     cnt=1;
     answer=0;
+    v = "ACFJMNRT";
     rule.clear();
     m.clear();
     for(auto&a: data) rule.push_back({{a[0],a[2]},{a[3],a[4]-'0'}});
-    vector<char> person(8);
-    person[0]='A'; person[1]='C'; person[2]='F'; person[3]='J';
-    person[4]='M'; person[5]='N'; person[6]='R'; person[7]='T';
-    for(auto&a:person) m[a]=0;
     string s = "";
-    make_name(person, s);
-    int a = answer;
-    return a;
+    make_name(s);
+    return answer;
 }
