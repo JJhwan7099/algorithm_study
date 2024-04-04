@@ -1,47 +1,44 @@
 #include <iostream>
-#include <vector>
 using namespace std;
-#define FOR(i,N) for(int i=1;i<=N;i++)
-int graph[101][101];
+#define FOR(i,N) for(int i=1; i<=N; i++)
+int T;
+int N,M;
+char grid[101][101];
 int dx[4] = {0,0,1,-1};
 int dy[4] = {1,-1,0,0};
+int vis[101][101];
 void dfs(int x, int y)
 {
-    graph[x][y] = -1;
-    int X,Y;
+    vis[x][y]=1;
     for(int i=0; i<4; i++)
     {
-        X = x + dx[i];
-        Y = y + dy[i];
-        if(graph[X][Y] == 1) dfs(X,Y);
+        int X = x + dx[i];
+        int Y = y + dy[i];
+        if(X<1||Y<1||X>N||Y>M||vis[X][Y]==1) continue;
+        else if(grid[X][Y]=='#') dfs(X,Y);
     }
 }
-int main()
-{
-    int T;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     cin >> T;
-    vector<int> ans;
-    for(int k=0; k<T; k++)
+    while(T--)
     {
-        int result = 0;
-        fill(&graph[0][0],&graph[101][101],-1);
-        int x,y; cin >> x >> y;
-        FOR(i,x)FOR(j,y) // 양이 1 풀숲이 0
-        {
-            char a; cin >> a;
-            if(a=='#') graph[i][j] = 1;
+        cin >> N >> M;
+        FOR(i,N)FOR(j,M) {
+            cin >> grid[i][j];
+            vis[i][j]=0;
         }
-        //dfs
-        FOR(i,x)FOR(j,y)
+        int ans = 0;
+        FOR(i,N)FOR(j,M)
         {
-            
-            if(graph[i][j]==1)
+            if(vis[i][j]!=1&&grid[i][j]=='#')
             {
+                ans++;
                 dfs(i,j);
-                result++;
             }
         }
-        ans.push_back(result);
+        cout << ans << '\n';
     }
-    for(auto&a : ans) cout << a << '\n';
+    return 0;
 }
