@@ -21,7 +21,7 @@ int check() {
     }
     return cnt;
 }
-void spread(queue<pair<int,int>>& ex, int& zerocnt, int& twocnt) {
+void spread(queue<pair<int,int>>& ex, int& zerocnt) {
     int s = ex.size();
     while(s--) {
         int x = ex.front().first;
@@ -35,7 +35,6 @@ void spread(queue<pair<int,int>>& ex, int& zerocnt, int& twocnt) {
                 ex.push({X,Y});
                 vis2[X][Y]=1;
                 if(board[X][Y]==0) zerocnt++;
-                else if(board[X][Y]==2) twocnt++;
             }
         }
     }
@@ -44,7 +43,6 @@ int start() {
     int sec = 0;
     queue<pair<int,int>> ex;
     int zerocnt = 0;
-    int twocnt = 0;
     for(auto&a: viruspos) {
         vis2[a.first][a.second]=1;
         ex.push(a);
@@ -52,8 +50,7 @@ int start() {
     int checkcnt = check();
     while(ex.size()>0 && zerocnt<checkcnt) {
         int a = zerocnt;
-        int b = twocnt;
-        spread(ex,zerocnt,twocnt);
+        spread(ex,zerocnt);  
         if(zerocnt<=checkcnt) {
             sec++;
         }
