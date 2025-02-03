@@ -15,13 +15,13 @@ int main() {
     }
     int result = 0;
     FOR(i,N) {
-        if(i>2) {
+        if(i==N) {
             for(int j=2; j<i; j++) {
                 result = max(result,honeySum[i]-honeySum[1]+honeySum[i]-honeySum[j]-honey[j]);
                 // cout << honeySum[i]-honeySum[1]+honeySum[i]-honeySum[j]-honey[j] << " " << i  << " " << j << endl;
             }
         }
-        if(N-i>1) {
+        if(i==1) {
             for(int j=N-1; j>i; j--) {
                 result = max(result,honeySum[N-1]-honeySum[i-1]+honeySum[j-1]-honeySum[i-1]-honey[j]);
                 // cout << honeySum[N-1]-honeySum[i-1]+honeySum[j-1]-honeySum[i-1]-honey[j] << " " << i << " " << j << endl;
